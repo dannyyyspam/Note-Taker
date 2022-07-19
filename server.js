@@ -1,51 +1,56 @@
-const PORT = process.env.PORT || 3001;
-const fs = require('fs');
-const path = require('path');
-const express = require('express');
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
+const notes = require("./db/db.json");
+const uuid = require("uuid");
+const { DH_CHECK_P_NOT_SAFE_PRIME, SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
+
 const app = express();
-const allNotes = require('./db/db.json');
+var PORT = process.env.PORT || 3001;
 
+// Middleware
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.json());
 
-app.use(express.static('public'));
+// STATIC MIDDLEWARE
+app.use(express.static("./public"));
 
-app.get('/api/notes', (req, res) => {
-    res.json(allNotes);
+
+
+//GET API db.json
+app.get("/api/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, "./db/db.json"))
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
+// Post function to add new notes to db.json
+app.post("/api/notes", (req, res) => {
+    const notes = JSON.parse(fs.readFileSync("./db/db.json"));
+    const newNotes = req.body;
+    newNotes.id = uuid.v4();
+    notes.push(newNotes);
+    fs.writeFileSync("./db/db.json", JSON.stringify(notes))
+    res.json(notes);
 });
 
-app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
+//used for deleting notes
+app.delete("/api/notes/:id", (req, res) => {
+    const notes = JSON.parse(fs.readFileSync("./db/db.json"));
+    const delNote = notes.filter((rmvNote) => rmvNote.id !== req.params.id);
+    fs.writeFileSync("./db/db.json", JSON.stringify(delNote));
+    res.json(delNote);
+})
+
+//HTML calls
+//calls home page
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+});
+//call for notes.html
+app.get("/notes", function (req, res) {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
-function createNewNote(body, notesArray) {
-    const newNote = body;
-    notesArray.push(newNote);
-    fs.writeFileSync(
-        path.join(__dirname, './db/db.json'),
-        JSON.stringify(notesArray, null, 2)
-    );
-    return newNote;
-}
-
-app.post('/api/notes', (req, res) => {
-    req.body.id = allNotes.length.toString();
-    //unique id needed, find package on npm?
-    
-    const newNote = createNewNote(req.body, allNotes);
-
-    res.json(newNote);
-});
-
-app.listen(PORT, () => {
-    console.log(`API server now on port ${PORT}!`);
+//Start listen
+app.listen(PORT, function () {
+    console.log("App listening on PORT: " + PORT);
 });
