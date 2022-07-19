@@ -15,9 +15,7 @@ app.use(express.json());
 // STATIC MIDDLEWARE
 app.use(express.static("./public"));
 
-
-
-//GET API db.json
+// GET API db.json
 app.get("/api/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "./db/db.json"))
 });
