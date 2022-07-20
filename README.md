@@ -68,7 +68,7 @@ ___
 
 [1]:https://first-app-created.herokuapp.com/
 [2]:https://github.com/coding-boot-camp/miniature-eureka
-[3]:https://raw.githubusercontent.com/its-jefe/Note-Taker/main/images/1.png
-[4]:https://raw.githubusercontent.com/its-jefe/Note-Taker/main/images/2.png
-[5]:https://raw.githubusercontent.com/its-jefe/Note-Taker/main/images/3.png
-[6]:https://raw.githubusercontent.com/its-jefe/Note-Taker/main/images/4.png
+[3]:https://raw.githubusercontent.com/dannyyyspam/Note-Taker/main/images/1.png
+[4]:https://raw.githubusercontent.com/dannyyyspam/Note-Taker/main/images/2.png
+[5]:https://raw.githubusercontent.com/dannyyyspam/Note-Taker/main/images/3.png
+[6]:https://raw.githubusercontent.com/dannyyyspam/Note-Taker/main/images/4.png
