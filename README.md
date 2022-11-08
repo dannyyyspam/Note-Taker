@@ -1,7 +1,7 @@
 # Note Taker
 Write, save, and delete notes! 
 
-Deployed on [Heroku][1]! 
+Deployed on [Vercel][1]! 
 
 Front-end starter code from [Xandromus][2]
 
@@ -66,7 +66,7 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 
 ___
 
-[1]:https://first-app-created.herokuapp.com/
+[1]:https://note-taker-three.vercel.app/
 [2]:https://github.com/coding-boot-camp/miniature-eureka
 [3]:https://raw.githubusercontent.com/dannyyyspam/Note-Taker/main/images/1.png
 [4]:https://raw.githubusercontent.com/dannyyyspam/Note-Taker/main/images/2.png
